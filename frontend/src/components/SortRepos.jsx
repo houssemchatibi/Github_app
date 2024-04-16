@@ -21,6 +21,7 @@ const SortRepos = ({ onSort, sortType }) => {
 					{button.text}
 				</button>
 			))}
+     
 		</div>
 	);
 };
