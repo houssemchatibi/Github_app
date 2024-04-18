@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Repos from '../components/Repos';
 import Spinner from '../components/Spinner';
 
@@ -12,10 +12,12 @@ const ExplorePage = () => {
 		setLoading(true);
 		setRepos([]);
 		try {
-			const res = await fetch(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc&per_page=10`);
-			const repos  = await res.json();
-			setRepos(repos.items);
-console.log("les Repos",repos)
+			const res = await fetch(`http://localhost:5000/api/explore/repos/${language}`);
+			const {repos}  = await res.json();
+      
+      console.log("reposs are:",repos )
+			setRepos(repos );
+       
 			setSelectedLanguage(language);
 		} catch (error) {
 			toast.error(error.message);
@@ -23,6 +25,7 @@ console.log("les Repos",repos)
 			setLoading(false);
 		}
 	};
+ 
 	return (
 		<div className='px-4'>
 			<div className='bg-glass max-w-2xl mx-auto rounded-md p-4'>
