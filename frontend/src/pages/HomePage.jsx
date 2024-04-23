@@ -22,6 +22,12 @@ const HomePage = () => {
 			const userRes = await fetch(`http://localhost:5000/api/users/profile/${username}`);
 			const {userProfile,repos} = await userRes.json();
 
+			if (!userProfile) {
+				// Si aucun utilisateur n'est trouvé, définissez les repos comme un tableau vide
+				setRepos([]);
+				toast.error("User not found");
+				return;
+			}
 			repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 			setUserProfile(userProfile);
 			setRepos(repos);

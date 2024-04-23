@@ -12,7 +12,10 @@ import authRoutes from "./routes/auth.route.js";
 const app = express();
 
 dotenv.config();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true // Allow cookies or authorization headers to be sent
+  }));
 
 app.get("/",(req,res)=>{
     res.send("Server is ready")
